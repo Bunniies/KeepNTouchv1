@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Edit Profile</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}<br>
+            {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.about_me.label }}<br>
+            {{ form.about_me(cols=50, rows=4) }}<br>
+            {% for error in form.about_me.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+        
+
+        <div  class="form-group ">
+            {{ form.picture.label() }}
+            {{ form.picture(class='form-control-file') }}
+            {% if form.picture.errors %}
+                {% for eroor in form.picture.errors %}
+                    <span class="text-danger">{{ eroor }}</span></br>
+                {% endfor %}
+
+
+            {% endif %}
+
+        </div>
+        <div class="form-group ">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+{% endblock %}

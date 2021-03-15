@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for event in events %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ BPs.query.filter_by(id=event.bp_id).first().name  }}</a> <!-- put the author of the event here, have to query it cause only have bp's id-->
+      <small class="text-muted">{{ event.date}}</small>
+    </div >
+    <h2><a class="article-title" href="#">{{ event.name }}</a></h2>
+    <p class="article-content">{{ event.description  }}
+        <br>
+        Number of Participants: {{ event.numofPeople }}
+    </p>
+
+      {% if session.get('student') == True %}
+          {% if not Student.query.join(partecipation).join(Event).filter( and_( partecipation.c.student_id == session.get('id'), partecipation.c.event_id == event.id) ).first() %}
+             <a align="right"> <form method="POST">
+              {{  confirmParticipation.hidden_tag()  }}
+                {{ confirmParticipation.event_id(value=event.id, style="display:none;") }}
+                    <fieldset class="form-group">
+                    <div class="form-group ">
+                        {{ confirmParticipation.submitC(class="btn btn btn-success") }}
+                    </div>
+                        </fieldset>
+              </form></a>
+          {% else %}
+              <a align="right"> <form method="POST">
+                    {{ deleteParticipation.hidden_tag() }}
+                    {{ deleteParticipation.event_id(value=event.id, style="display:none;") }}
+                    <fieldset class="form-group">
+                    <div class="form-group ">
+                        {{ deleteParticipation.submitD(class="btn btn-danger") }}
+                    </div>
+                    </fieldset>
+               </form></a>
+          {% endif %}
+        {% endif %}
+
+  </div>
+</article>
+{% endfor %}
+{% endblock content %}

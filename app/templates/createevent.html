@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+    <div class="content-section">
+            <form method="POST" action="">
+            {{  formpage.hidden_tag()}}
+            <fieldset class="form-group">
+                <legend class="border-botton mb-4">Create your next Event!</legend>
+
+            <!--   name = StringField('Name:', validators=[DataRequired(), Length(min=2, max=100)])
+    date = DateField('Date: ',validators=[DataRequired()] )
+    description = StringField('Description:', validators=[DataRequired(), Length(min=50, max=500)])
+    maxPeople = IntegerField('Maximum # of Partecipants:', validators=[DataRequired()])
+    location = StringField('Description:', validators=[DataRequired(), Length(min=3, max=100)])
+
+    submit = SubmitField('Submit') -->
+                <div class="form-group ">
+                    {{ formpage.name.label(class="form-control-lable") }}
+                    {% if formpage.name.errors %}
+                        {{ formpage.name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for eroor in formpage.name.errors %}
+                            <span>{{ eroor }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ formpage.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formpage.date.label(class="form-control-lable") }}
+                      {% if formpage.date.errors %}
+                        {{ formpage.date(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for eroor in formpage.date.errors %}
+                            <span>{{ eroor }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ formpage.date(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formpage.description.label(class="form-control-lable") }}
+                      {% if formpage.description.errors %}
+                        {{ formpage.description(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for eroor in formpage.description.errors %}
+                            <span>{{ eroor }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ formpage.description(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formpage.location.label(class="form-control-lable") }}
+                    {% if formpage.location.errors %}
+                        {{ formpage.location(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                        {% for eroor in formpage.location.errors %}
+                            <span>{{ eroor }}</span>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ formpage.location(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group ">
+                    {{ formpage.submit(class="btn btn-outline-info") }}
+                </div>
+
+            </fieldset>
+
+        </form>
+</div>
+
+
+{% endblock content %}</title>
+</head>
+<body>
+
+
+</body>
+</html>
